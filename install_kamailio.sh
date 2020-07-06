@@ -112,9 +112,6 @@ a2dissite 000-default
 
 systemctl reload apache2
 
-mysql -u root -p<<MYSQL_SCRIPT
-GRANT ALL PRIVILEGES on siremis.* to 'siremis'@'localhost' IDENTIFIED BY '8)Le5~#C';
-FLUSH PRIVILEGES;
-MYSQL_SCRIPT
+mysql -u root -p --execute="GRANT ALL PRIVILEGES ON siremis.* TO siremis@localhost IDENTIFIED BY '8)Le5~#C'; FLUSH PRIVILEGES;"
 
 echo -e "Access siremis on http://ipaddress/siremis/install"
