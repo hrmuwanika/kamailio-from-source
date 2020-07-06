@@ -64,6 +64,8 @@ sudo /usr/local/sbin/kamdbctl create
 sed -i -e '2i#!define WITH_MYSQL\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '3i#!define WITH_AUTH\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '4i#!define WITH_USRLOCDB\' /usr/local/etc/kamailio/kamailio.cfg
+sed -i -e '5i#!define WITH_NAT\' /usr/local/etc/kamailio/kamailio.cfg
+sed -i -e '6i#!define WITH_ANTIFLOOD\' /usr/local/etc/kamailio/kamailio.cfg
 
 make install-systemd-debian
 systemctl enable kamailio
