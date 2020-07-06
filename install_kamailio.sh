@@ -116,4 +116,4 @@ GRANT ALL PRIVILEGES ON siremis.* TO siremis@localhost IDENTIFIED BY '8)Le5~#C';
 FLUSH PRIVILEGES;
 EXIT; 
 
-echo "Access siremis on http://ipaddress/siremis/install"
+echo -e "Access siremis on http://ipaddress/siremis/install"
