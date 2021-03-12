@@ -27,9 +27,9 @@ sudo systemctl start mariadb
 
 mysql_secure_installation
 
-sudo apt install -y git gcc g++ flex bison default-libmysqlclient-dev make autoconf libssl-dev libcurl4-openssl-dev \
-libncurses5-dev libxml2-dev libpcre3-dev unixodbc-dev vim iptables-dev libunistring-dev htop dkms autoconf libmnl-dev \
-libsctp-dev libradcli-dev tcpdump screen ntp ntpdate
+sudo apt install -y tcpdump screen ntp ntpdate git-core dkms gcc flex bison default-libmysqlclient-dev make libssl-dev \
+libcurl4-openssl-dev libxml2-dev libpcre3-dev bash-completion g++ autoconf rtpproxy libmnl-dev libsctp-dev ipsec-tools libradcli-dev \
+libradcli4 libncurses5-dev unixodbc-dev vim iptables-dev libunistring-dev htop bash-completion ipsec-tools libradcli4
 
 echo "set mouse-=a" >> ~/.vimrc
 
@@ -42,6 +42,11 @@ cd kamailio-5.3
 sudo git clone --depth 1 --no-single-branch https://github.com/kamailio/kamailio kamailio
 cd kamailio
 git checkout -b 5.3 origin/5.3
+
+# make include_modules="cdp cdp_avp db_mysql dialplan ims_auth ims_charging ims_dialog ims_diameter_server ims_icscf ims_ipsec_pcscf ims_isc ims_ocs \
+# ims_qos ims_registrar_pcscf ims_registrar_scscf ims_usrloc_pcscf ims_usrloc_scscf outbound presence presence_conference presence_dialoginfo \
+# presence_mwi presence_profile presence_reginfo presence_xml pua pua_bla pua_dialoginfo pua_reginfo pua_rpc pua_usrloc pua_xmpp sctp tls utils \
+# xcap_client xcap_server xmlops xmlrpc" cfg
 
 make include_modules="db_mysql dialplan debugger permissions usrloc dispatcher registrar sdpops presence auth auth_db avp tm \
 presence_mwi outbound sl maxfwd xhttp db_text  textops siputils uac presence_dialoginfo kex uac_redirect xlog siptrace sanity \
