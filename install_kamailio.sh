@@ -77,10 +77,11 @@ systemctl start kamailio
 # Siremis installation
 #----------------------------------------------------
 sudo apt install -y apache2 apache2-utils 
+sudo systemctl enable apache2
+
 sudo apt install -y php php-mysql php-gd php-curl php-xml php-xmlrpc php-pear libapache2-mod-php unzip wget
 
-sudo a2enmod rewrite
-sudo systemctl enable apache2 
+sudo a2enmod rewrite 
 sudo systemctl restart apache2
 
 sudo sed -i s/"memory_limit = 128M"/"memory_limit = 512M"/g /etc/php/7.3/apache2/php.ini
@@ -91,7 +92,7 @@ sudo sed -i s/"max_execution_time = 30"/"max_execution_time = 360"/g /etc/php/7.
 cd /usr/src
 wget http://pear.php.net/get/XML_RPC-1.5.5.tgz
 pear upgrade XML_RPC-1.5.5.tgz
-sudo systemctl enable apache2 
+sudo systemctl restart apache2 
 
 #----------------------------------------------------
 # Download Siremis
@@ -112,5 +113,15 @@ a2dissite 000-default
 systemctl reload apache2
 
 mysql -u root -p --execute="GRANT ALL PRIVILEGES ON siremis.* TO siremis@localhost IDENTIFIED BY '8)Le5~#C'; FLUSH PRIVILEGES;"
+
+#------------------------------------------------------
+# Install Letsencrypt
+#------------------------------------------------------
+sudo apt install snapd -y
+sudo snap install core
+sudo snap refresh core
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo certbot --apache -d vps.rw -d www.vps.rw
 
 echo -e "Access siremis on http://ipaddress/siremis/install"
