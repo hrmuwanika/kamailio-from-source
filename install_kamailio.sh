@@ -76,13 +76,11 @@ systemctl start kamailio
 #----------------------------------------------------
 # Siremis installation
 #----------------------------------------------------
-sudo apt install -y apache2 apache2-utils php php-mysql php-gd php-curl php-xml php-xmlrpc \
-php-pear libapache2-mod-php unzip wget
-
-sudo systemctl enable apache2 
-sudo systemctl start apache2
+sudo apt install -y apache2 apache2-utils 
+sudo apt install -y php php-mysql php-gd php-curl php-xml php-xmlrpc php-pear libapache2-mod-php unzip wget
 
 sudo a2enmod rewrite
+sudo systemctl enable apache2 
 sudo systemctl restart apache2
 
 sudo sed -i s/"memory_limit = 128M"/"memory_limit = 512M"/g /etc/php/7.3/apache2/php.ini
@@ -93,11 +91,12 @@ sudo sed -i s/"max_execution_time = 30"/"max_execution_time = 360"/g /etc/php/7.
 cd /usr/src
 wget http://pear.php.net/get/XML_RPC-1.5.5.tgz
 pear upgrade XML_RPC-1.5.5.tgz
+sudo systemctl enable apache2 
 
 #----------------------------------------------------
 # Download Siremis
 #----------------------------------------------------
-cd /var/www/html/
+cd /var/www
 git clone https://github.com/asipto/siremis siremis-5.3.0
 cd siremis-5.3.0
 git checkout -b 5.3 origin/5.3
