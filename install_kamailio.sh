@@ -20,16 +20,16 @@ sudo apt autoremove -y
 # Install dependencies
 #--------------------------------------------------
 echo -e "\n============= Install dependencies ================"
-sudo apt install -y mariadb-server mariadb-client
+sudo apt install -y mariadb-server 
 
 sudo systemctl enable mariadb
 sudo systemctl start mariadb
 
 mysql_secure_installation
 
-sudo apt install -y tcpdump screen ntp ntpdate git-core dkms gcc flex bison default-libmysqlclient-dev make libssl-dev \
-libcurl4-openssl-dev libxml2-dev libpcre3-dev bash-completion g++ autoconf rtpproxy libmnl-dev libsctp-dev ipsec-tools libradcli-dev \
-libradcli4 libncurses5-dev unixodbc-dev vim iptables-dev libunistring-dev htop bash-completion ipsec-tools libradcli4
+sudo apt install -y tcpdump screen ntp ntpdate git dkms gcc flex bison default-libmysqlclient-dev make libssl-dev \
+libcurl4-openssl-dev libxml2-dev libpcre3-dev bash-completion g++ autoconf libmnl-dev libsctp-dev libradcli-dev \
+libradcli4 libncurses5-dev unixodbc-dev vim iptables-dev libunistring-dev htop bash-completion libradcli4
 
 echo "set mouse-=a" >> ~/.vimrc
 
