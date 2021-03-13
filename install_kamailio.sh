@@ -1,5 +1,7 @@
 #!/bin/bash
-
+#
+# Kamailio installation on Debian Buster
+#
 #----------------------------------------------------
 # Disable password authentication
 #----------------------------------------------------
