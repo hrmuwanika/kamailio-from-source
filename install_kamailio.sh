@@ -22,16 +22,16 @@ sudo apt autoremove -y
 # Install dependencies
 #--------------------------------------------------
 echo -e "\n============= Install dependencies ================"
-sudo apt install -y mariadb-server 
+sudo apt install -y default-mysql-server
 
-sudo systemctl enable mariadb
-sudo systemctl start mariadb
+sudo systemctl enable mysql.service
+sudo systemctl start mysql.service
 
 mysql_secure_installation
 
-sudo apt install -y tcpdump screen ntp ntpdate git dkms gcc flex bison default-libmysqlclient-dev make libssl-dev \
-libcurl4-openssl-dev libxml2-dev libpcre3-dev bash-completion g++ autoconf libmnl-dev libsctp-dev libradcli-dev \
-libradcli4 libncurses5-dev unixodbc-dev vim iptables-dev libunistring-dev htop bash-completion libradcli4
+sudo apt install -y tcpdump screen ntp ntpdate git dkms gcc g++ autoconf pkg-config flex bison libmysqlclient-dev \
+libcurl4-openssl-dev libxml2-dev libpcre3-dev bash-completion libmnl-dev libsctp-dev libradcli-dev libssl-dev make \
+libradcli4 libncurses5-dev unixodbc-dev vim iptables-dev libunistring-dev htop
 
 echo "set mouse-=a" >> ~/.vimrc
 
@@ -39,11 +39,11 @@ echo "set mouse-=a" >> ~/.vimrc
 # Download Kamailio from source
 #-----------------------------------------------
 cd /usr/local/src/
-sudo mkdir –p kamailio-5.3
-cd kamailio-5.3
-sudo git clone --depth 1 --no-single-branch https://github.com/kamailio/kamailio kamailio
+sudo mkdir –p kamailio-5.5
+cd kamailio-5.5
+git clone --depth 1 --no-single-branch https://github.com/kamailio/kamailio kamailio
 cd kamailio
-git checkout -b 5.3 origin/5.3
+git checkout -b 5.5 origin/5.5
 
 make include_modules="db_mysql dialplan debugger permissions usrloc dispatcher registrar sdpops presence auth auth_db avp tm \
 presence_mwi outbound sl maxfwd xhttp db_text  textops siputils uac presence_dialoginfo kex uac_redirect xlog siptrace sanity \
