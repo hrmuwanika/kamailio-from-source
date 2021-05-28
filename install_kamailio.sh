@@ -37,7 +37,7 @@ sudo systemctl start mariadb
 
 mysql_secure_installation
 
-sudo apt install -y tcpdump screen ntp ntpdate git dkms gcc g++ autoconf pkg-config flex bison libmysqlclient-dev \
+sudo apt install -y tcpdump screen ntp ntpdate git dkms gcc g++ autoconf pkg-config flex bison default-libmysqlclient-dev \
 libcurl4-openssl-dev libxml2-dev libpcre3-dev bash-completion libmnl-dev libsctp-dev libradcli-dev libssl-dev make \
 libradcli4 libncurses5-dev unixodbc-dev vim iptables-dev libunistring-dev htop libmariadb-dev libmariadb-dev-compat
 
