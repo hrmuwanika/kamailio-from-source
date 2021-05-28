@@ -81,11 +81,11 @@ sed -i -e '7i#!define WITH_NAT\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '8i#!define WITH_RTPENGINE\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '9i#!define WITH_ANTIFLOOD\' /usr/local/etc/kamailio/kamailio.cfg
 
-make install-systemd-debian
-sudo systemctl daemon-reload
-sudo systemctl start kamailio
-sudo systemctl stop kamailio
-sudo systemctl enable kamailio
+cd /usr/local/src/kamailio-5.5/kamailio/pkg/kamailio/deb/debian
+cp kamailio.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl start kamailio
+systemctl enable kamailio
 
 #----------------------------------------------------
 # Siremis installation
