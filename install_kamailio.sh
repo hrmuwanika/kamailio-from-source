@@ -22,16 +22,16 @@ sudo apt autoremove -y
 # Install dependencies
 #--------------------------------------------------
 echo -e "\n============= Install dependencies ================"
-sudo apt install -y default-mysql-server
+sudo apt install -y mariadb-server
 
-sudo systemctl enable mysql.service
-sudo systemctl start mysql.service
+sudo systemctl enable mariadb
+sudo systemctl start mariadb
 
 mysql_secure_installation
 
 sudo apt install -y tcpdump screen ntp ntpdate git dkms gcc g++ autoconf pkg-config flex bison libmysqlclient-dev \
 libcurl4-openssl-dev libxml2-dev libpcre3-dev bash-completion libmnl-dev libsctp-dev libradcli-dev libssl-dev make \
-libradcli4 libncurses5-dev unixodbc-dev vim iptables-dev libunistring-dev htop
+libradcli4 libncurses5-dev unixodbc-dev vim iptables-dev libunistring-dev htop libmariadb-dev libmariadb-dev-compat
 
 echo "set mouse-=a" >> ~/.vimrc
 
@@ -53,12 +53,13 @@ make all
 make install
 ldconfig
 
-sed -i 's/# SIP_DOMAIN=kamailio.org/SIP_DOMAIN=vps.rw/g' /usr/local/etc/kamailio/kamctlrc
+sed -i 's/# SIP_DOMAIN=kamailio.org/SIP_DOMAIN=example.com/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBENGINE=MYSQL/DBENGINE=MYSQL/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBHOST=localhost/DBHOST=localhost/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBNAME=kamailio/DBNAME=kamailio/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBRWUSER="kamailio"/DBRWUSER="kamailio"/g' /usr/local/etc/kamailio/kamctlrc
-sed -i 's/# DBRWPW="kamailiorw"/DBRWPW="8)Le5~#C"/g' /usr/local/etc/kamailio/kamctlrc
+sed -i 's/# DBRWPW="kamailiorw"/DBRWPW="WCo9qU</3$UPMXT"/g' /usr/local/etc/kamailio/kamctlrc
+sed -i 's/# DBROPW="kamailioro"/DBROPW="Jc[=z5+EN2'f{dK"/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/#CHARSET="latin1"/CHARSET="latin1"/g' /usr/local/etc/kamailio/kamctlrc
 
 sudo /usr/local/sbin/kamdbctl create
@@ -73,8 +74,10 @@ sed -i -e '8i#!define WITH_RTPENGINE\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '9i#!define WITH_ANTIFLOOD\' /usr/local/etc/kamailio/kamailio.cfg
 
 make install-systemd-debian
-systemctl enable kamailio
-systemctl start kamailio
+sudo systemctl daemon-reload
+sudo systemctl start kamailio
+sudo systemctl stop kamailio
+sudo systemctl enable kamailio
 
 #----------------------------------------------------
 # Siremis installation
