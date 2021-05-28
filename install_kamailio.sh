@@ -66,7 +66,7 @@ sed -i 's/# DBENGINE=MYSQL/DBENGINE=MYSQL/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBHOST=localhost/DBHOST=localhost/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBNAME=kamailio/DBNAME=kamailio/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBRWUSER="kamailio"/DBRWUSER="kamailio"/g' /usr/local/etc/kamailio/kamctlrc
-sed -i 's/# DBRWPW="kamailiorw"/DBRWPW="WCo9qU</3$UPMXT"/g' /usr/local/etc/kamailio/kamctlrc
+sed -i 's/# DBRWPW="kamailiorw"/DBRWPW="WCo9qU<$3$UPMXT"/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBROPW="kamailioro"/DBROPW="Jc[=z5+EN2'f{dK"/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/#CHARSET="latin1"/CHARSET="latin1"/g' /usr/local/etc/kamailio/kamctlrc
 
