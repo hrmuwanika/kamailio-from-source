@@ -3,7 +3,7 @@
 # Variables used in the script
 IPTABLES="/sbin/iptables"
 IP6TABLES="/sbin/ip6tables"
-RTP="16384:16485"
+RTP="30000:40000"
 
 #Flush tables
 $IPTABLES -F
