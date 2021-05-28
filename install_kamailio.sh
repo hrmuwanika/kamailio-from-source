@@ -126,7 +126,7 @@ a2dissite 000-default
 
 systemctl reload apache2
 
-mysql -u root -p --execute="GRANT ALL PRIVILEGES ON siremis.* TO siremis@localhost IDENTIFIED BY '8)Le5~#C'; FLUSH PRIVILEGES;"
+mysql -u root -p --execute="GRANT ALL PRIVILEGES ON siremis.* TO siremis@localhost IDENTIFIED BY 'WCo9qU</3$UPMXT'; FLUSH PRIVILEGES;"
 
 #------------------------------------------------------
 # Install Letsencrypt
