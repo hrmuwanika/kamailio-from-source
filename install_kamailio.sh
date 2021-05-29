@@ -47,11 +47,11 @@ echo "set mouse-=a" >> ~/.vimrc
 # Download Kamailio from source
 #-----------------------------------------------
 cd /usr/local/src/
-sudo mkdir –p kamailio-5.5
-cd kamailio-5.5
+sudo mkdir –p kamailio-5.4
+cd kamailio-5.4
 git clone --depth 1 --no-single-branch https://github.com/kamailio/kamailio kamailio
 cd kamailio
-git checkout -b 5.5 origin/5.5
+git checkout -b 5.4 origin/5.4
 
 make include_modules="db_mysql dialplan debugger permissions usrloc dispatcher registrar sdpops presence auth auth_db avp tm \
 presence_mwi outbound sl maxfwd xhttp db_text  textops siputils uac presence_dialoginfo kex uac_redirect xlog siptrace sanity \
