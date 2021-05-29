@@ -133,6 +133,6 @@ sudo snap install core
 sudo snap refresh core
 sudo snap install --classic certbot
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
-sudo certbot --apache -d vps.rw 
+sudo certbot --apache -d example.com
 
 echo -e "Access siremis on http://ipaddress/siremis/install"
