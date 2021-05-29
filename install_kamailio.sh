@@ -46,9 +46,8 @@ echo "set mouse-=a" >> ~/.vimrc
 #-----------------------------------------------
 # Download Kamailio from source
 #-----------------------------------------------
-cd /usr/local/src/
-sudo mkdir –p kamailio-5.4
-cd kamailio-5.4
+mkdir -p /usr/local/src/kamailio-5.4
+cd /usr/local/src/kamailio-5.4
 git clone --depth 1 --no-single-branch https://github.com/kamailio/kamailio kamailio
 cd kamailio
 git checkout -b 5.4 origin/5.4
@@ -70,7 +69,7 @@ sed -i 's/# DBRWPW="kamailiorw"/DBRWPW="WCo9qU#$3$UPMXT"/g' /usr/local/etc/kamai
 sed -i 's/# DBROPW="kamailioro"/DBROPW="Jc[=z5+EN2@f{dK"/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/#CHARSET="latin1"/CHARSET="latin1"/g' /usr/local/etc/kamailio/kamctlrc
 
-sudo /usr/local/sbin/kamdbctl create
+/usr/local/sbin/kamdbctl create
 
 sed -i -e '2i#!define WITH_MYSQL\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '3i#!define WITH_AUTH\' /usr/local/etc/kamailio/kamailio.cfg
@@ -81,11 +80,9 @@ sed -i -e '7i#!define WITH_NAT\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '8i#!define WITH_RTPENGINE\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '9i#!define WITH_ANTIFLOOD\' /usr/local/etc/kamailio/kamailio.cfg
 
-cd /usr/local/src/kamailio-5.5/kamailio/pkg/kamailio/deb/debian
-cp kamailio.service /etc/systemd/system/
-systemctl daemon-reload
-systemctl start kamailio
+make install-systemd-debian
 systemctl enable kamailio
+systemctl start kamailio
 
 #----------------------------------------------------
 # Siremis installation
