@@ -1,7 +1,5 @@
 #!/bin/bash
-#
-# Kamailio installation on Debian Buster
-#
+
 #----------------------------------------------------
 # Disable password authentication
 #----------------------------------------------------
@@ -30,27 +28,28 @@ chmod +x iptables.sh
 # Install dependencies
 #--------------------------------------------------
 echo -e "\n============= Install dependencies ================"
-sudo apt install -y mariadb-server
+sudo apt install -y mariadb-server mariadb-client
 
 sudo systemctl enable mariadb
 sudo systemctl start mariadb
 
 mysql_secure_installation
 
-sudo apt install -y tcpdump screen ntp ntpdate git dkms gcc g++ autoconf pkg-config flex bison default-libmysqlclient-dev \
-libcurl4-openssl-dev libxml2-dev libpcre3-dev bash-completion libmnl-dev libsctp-dev libradcli-dev libssl-dev make \
-libradcli4 libncurses5-dev unixodbc-dev vim iptables-dev libunistring-dev htop libmariadb-dev libmariadb-dev-compat
+sudo apt install -y git gcc g++ flex bison default-libmysqlclient-dev make autoconf libssl-dev libcurl4-openssl-dev \
+libncurses5-dev libxml2-dev libpcre3-dev unixodbc-dev vim iptables-dev libunistring-dev htop dkms autoconf libmnl-dev \
+libsctp-dev libradcli-dev tcpdump screen ntp ntpdate
 
 echo "set mouse-=a" >> ~/.vimrc
 
 #-----------------------------------------------
 # Download Kamailio from source
 #-----------------------------------------------
-mkdir -p /usr/local/src/kamailio-5.4
-cd /usr/local/src/kamailio-5.4
-git clone --depth 1 --no-single-branch https://github.com/kamailio/kamailio kamailio
+cd /usr/local/src/
+sudo mkdir –p kamailio-5.5
+cd kamailio-5.5
+sudo git clone --depth 1 --no-single-branch https://github.com/kamailio/kamailio kamailio
 cd kamailio
-git checkout -b 5.4 origin/5.4
+git checkout -b 5.5 origin/5.5
 
 make include_modules="db_mysql dialplan debugger permissions usrloc dispatcher registrar sdpops presence auth auth_db avp tm \
 presence_mwi outbound sl maxfwd xhttp db_text  textops siputils uac presence_dialoginfo kex uac_redirect xlog siptrace sanity \
@@ -65,11 +64,10 @@ sed -i 's/# DBENGINE=MYSQL/DBENGINE=MYSQL/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBHOST=localhost/DBHOST=localhost/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBNAME=kamailio/DBNAME=kamailio/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBRWUSER="kamailio"/DBRWUSER="kamailio"/g' /usr/local/etc/kamailio/kamctlrc
-sed -i 's/# DBRWPW="kamailiorw"/DBRWPW="WCo9qU#$3$UPMXT"/g' /usr/local/etc/kamailio/kamctlrc
-sed -i 's/# DBROPW="kamailioro"/DBROPW="Jc[=z5+EN2@f{dK"/g' /usr/local/etc/kamailio/kamctlrc
+sed -i 's/# DBRWPW="kamailiorw"/DBRWPW="kamailiorw"/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/#CHARSET="latin1"/CHARSET="latin1"/g' /usr/local/etc/kamailio/kamctlrc
 
-/usr/local/sbin/kamdbctl create
+sudo /usr/local/sbin/kamdbctl create
 
 sed -i -e '2i#!define WITH_MYSQL\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '3i#!define WITH_AUTH\' /usr/local/etc/kamailio/kamailio.cfg
@@ -88,11 +86,10 @@ systemctl start kamailio
 # Siremis installation
 #----------------------------------------------------
 sudo apt install -y apache2 apache2-utils 
-sudo systemctl enable apache2
-
 sudo apt install -y php php-mysql php-gd php-curl php-xml php-xmlrpc php-pear libapache2-mod-php unzip wget
 
-sudo a2enmod rewrite 
+sudo a2enmod rewrite
+sudo systemctl enable apache2 
 sudo systemctl restart apache2
 
 sudo sed -i s/"memory_limit = 128M"/"memory_limit = 512M"/g /etc/php/7.3/apache2/php.ini
@@ -103,7 +100,7 @@ sudo sed -i s/"max_execution_time = 30"/"max_execution_time = 360"/g /etc/php/7.
 cd /usr/src
 wget http://pear.php.net/get/XML_RPC-1.5.5.tgz
 pear upgrade XML_RPC-1.5.5.tgz
-sudo systemctl restart apache2 
+sudo systemctl enable apache2 
 
 #----------------------------------------------------
 # Download Siremis
@@ -123,16 +120,6 @@ a2dissite 000-default
 
 systemctl reload apache2
 
-mysql -u root -p --execute="GRANT ALL PRIVILEGES ON siremis.* TO siremis@localhost IDENTIFIED BY 'WCo9qU#$3$UPMXT'; FLUSH PRIVILEGES;"
-
-#------------------------------------------------------
-# Install Letsencrypt
-#------------------------------------------------------
-sudo apt install snapd -y
-sudo snap install core
-sudo snap refresh core
-sudo snap install --classic certbot
-sudo ln -s /snap/bin/certbot /usr/bin/certbot
-sudo certbot --apache -d example.com
+mysql -u root -p --execute="GRANT ALL PRIVILEGES ON siremis.* TO siremis@localhost IDENTIFIED BY '8)Le5~#C'; FLUSH PRIVILEGES;"
 
 echo -e "Access siremis on http://ipaddress/siremis/install"
