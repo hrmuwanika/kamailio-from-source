@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Script for installing Odoo on Debian 10.0 (could be used for other version too)
+# Script for installing Kamailio installation on Debian Buster
 # Authors: Henry Robert Muwanika
 #
 #-------------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 # sudo nano install_kamailio.sh
 # Place this content in it and then make the file executable:
 # sudo chmod +x install_kamailio.sh
-# Execute the script to install Odoo:
+# Execute the script to install Kamailio:
 # ./install_kamailio.sh
 ################################################################################
 #
