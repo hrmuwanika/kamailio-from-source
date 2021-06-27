@@ -61,7 +61,7 @@ mysql_secure_installation
 
 sudo apt install -y git gcc g++ flex bison default-libmysqlclient-dev make autoconf libssl-dev libcurl4-openssl-dev tcpdump \
 libncurses5-dev libxml2-dev libpcre3-dev unixodbc-dev vim libsctp-dev libunistring-dev htop dkms libradcli-dev libmnl-dev \
-screen ntp ntpdate
+screen ntp ntpdate libmariadbclient-dev libcurl3-gnutls libc6 libcurl4 ca-certificates
 
 echo "set mouse-=a" >> ~/.vimrc
 
@@ -76,7 +76,7 @@ cd kamailio
 git checkout -b 5.5 origin/5.5
 
 make include_modules="db_mysql dialplan debugger permissions usrloc dispatcher registrar sdpops presence auth auth_db avp tm \
-presence_mwi outbound sl maxfwd xhttp db_text  textops siputils uac presence_dialoginfo kex uac_redirect xlog siptrace sanity \
+presence_mwi outbound sl maxfwd xhttp db_text textops siputils uac presence_dialoginfo kex uac_redirect xlog siptrace sanity \
 htable rr pv path tls ctl dmq dialog pua_dialoginfo avpops pua textopsx tmx presence_xml" cfg
 
 make all
