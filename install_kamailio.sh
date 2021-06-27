@@ -33,14 +33,13 @@ sudo service sshd restart
 # Update Server
 #--------------------------------------------------
 echo -e "\n============= Update Server ================"
-sudo apt update
-sudo apt upgrade -y
+sudo apt update && sudo apt -y upgrade 
 sudo apt autoremove -y
 
 #----------------------------------------------------
 # Firewall rules
 #----------------------------------------------------
-sudo apt install  -y iptables-dev iptables-persistent
+sudo apt install -y iptables-dev iptables-persistent
 wget https://raw.githubusercontent.com/hrmuwanika/kamailio-from-source/master/iptables.sh
 chmod +x iptables.sh
 ./iptables.sh
@@ -49,6 +48,10 @@ chmod +x iptables.sh
 # Install dependencies
 #--------------------------------------------------
 echo -e "\n============= Install dependencies ================"
+sudo apt-get install software-properties-common dirmngr
+sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc'
+sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] https://mariadb.mirror.liquidtelecom.com/repo/10.5/debian buster main'
+sudo apt update
 sudo apt install -y mariadb-server mariadb-client
 
 sudo systemctl enable mariadb
@@ -56,9 +59,9 @@ sudo systemctl start mariadb
 
 mysql_secure_installation
 
-sudo apt install -y git gcc g++ flex bison default-libmysqlclient-dev make autoconf libssl-dev libcurl4-openssl-dev \
-libncurses5-dev libxml2-dev libpcre3-dev unixodbc-dev vim iptables-dev libunistring-dev htop dkms autoconf libmnl-dev \
-libsctp-dev libradcli-dev tcpdump screen ntp ntpdate
+sudo apt install -y git gcc g++ flex bison default-libmysqlclient-dev make autoconf libssl-dev libcurl4-openssl-dev tcpdump \
+libncurses5-dev libxml2-dev libpcre3-dev unixodbc-dev vim libsctp-dev libunistring-dev htop dkms libradcli-dev libmnl-dev \
+screen ntp ntpdate
 
 echo "set mouse-=a" >> ~/.vimrc
 
@@ -135,6 +138,8 @@ cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/si
 make apache24-conf >> /etc/apache2/sites-available/siremis.conf
 make prepare24
 make chown
+
+# sudo sed -i s/"#ServerName www.example.com"/"ServerName $WEBSITE_NAME"/g /etc/apache2/sites-available/siremis.conf
 
 a2ensite siremis
 a2dissite 000-default
