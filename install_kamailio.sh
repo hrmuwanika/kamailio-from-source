@@ -47,6 +47,12 @@ chmod +x iptables.sh
 #--------------------------------------------------
 # Install dependencies
 #--------------------------------------------------
+sudo apt install -y git gcc g++ flex bison libmariadb-dev libmariadb-dev-compat make autoconf libssl-dev libcurl4-openssl-dev tcpdump \
+libncurses5-dev libxml2-dev libpcre3-dev unixodbc-dev vim libsctp-dev libunistring-dev htop dkms libradcli-dev libmnl-dev \
+screen ntp ntpdate libmariadbclient-dev libcurl3-gnutls libc6 libcurl4 ca-certificates
+
+echo "set mouse-=a" >> ~/.vimrc
+
 echo -e "\n============= Install dependencies ================"
 sudo apt-get install software-properties-common dirmngr
 sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc'
@@ -58,12 +64,6 @@ sudo systemctl enable mariadb
 sudo systemctl start mariadb
 
 mysql_secure_installation
-
-sudo apt install -y git gcc g++ flex bison default-libmysqlclient-dev make autoconf libssl-dev libcurl4-openssl-dev tcpdump \
-libncurses5-dev libxml2-dev libpcre3-dev unixodbc-dev vim libsctp-dev libunistring-dev htop dkms libradcli-dev libmnl-dev \
-screen ntp ntpdate libmariadbclient-dev libcurl3-gnutls libc6 libcurl4 ca-certificates
-
-echo "set mouse-=a" >> ~/.vimrc
 
 #-----------------------------------------------
 # Download Kamailio from source
@@ -103,6 +103,7 @@ sed -i -e '8i#!define WITH_RTPENGINE\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '9i#!define WITH_ANTIFLOOD\' /usr/local/etc/kamailio/kamailio.cfg
 
 make install-systemd-debian
+systemctl daemon-reload
 systemctl enable kamailio
 systemctl start kamailio
 
