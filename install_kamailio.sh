@@ -140,7 +140,7 @@ make apache24-conf >> /etc/apache2/sites-available/siremis.conf
 make prepare24
 make chown
 
-# sudo sed -i s/"#ServerName www.example.com"/"ServerName $WEBSITE_NAME"/g /etc/apache2/sites-available/siremis.conf
+sudo sed -i s/"#ServerName www.example.com"/"ServerName $WEBSITE_NAME"/g /etc/apache2/sites-available/siremis.conf
 
 a2ensite siremis
 a2dissite 000-default
