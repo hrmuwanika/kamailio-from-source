@@ -18,8 +18,20 @@ ENABLE_SSL="True"
 # Set the website name
 WEBSITE_NAME="example.com"
 # Provide Email to register ssl certificate
-ADMIN_EMAIL="odoo@example.com"
+ADMIN_EMAIL="kamailio@example.com"
 ##
+
+#----------------------------------------------------
+# Set the time zone
+#----------------------------------------------------
+## FIND YOUR TIMEZONE
+tzselect
+
+## SET TIMEZONE EXAMPLE
+timedatectl set-timezone Africa/Kigali
+
+## CHECK TIMEZONE
+timedatectl status
 
 #----------------------------------------------------
 # Disable password authentication
@@ -48,8 +60,8 @@ chmod +x iptables.sh
 # Install dependencies
 #--------------------------------------------------
 sudo apt install -y git gcc g++ flex bison libmariadb-dev libmariadb-dev-compat make autoconf libssl-dev libcurl4-openssl-dev tcpdump \
-libncurses5-dev libxml2-dev libpcre3-dev unixodbc-dev vim libsctp-dev libunistring-dev htop dkms libradcli-dev libmnl-dev \
-screen ntp ntpdate libmariadbclient-dev libcurl3-gnutls libc6 libcurl4 ca-certificates
+libncurses5-dev libxml2-dev libpcre3-dev unixodbc-dev vim libsctp-dev libunistring-dev htop dkms libradcli-dev libmnl-dev lsb-release \
+screen ntp ntpdate libmariadbclient-dev libcurl3-gnutls libc6 libcurl4 ca-certificates dbus
 
 echo "set mouse-=a" >> ~/.vimrc
 
@@ -147,7 +159,7 @@ a2dissite 000-default
 
 systemctl reload apache2
 
-mysql -u root -p --execute="GRANT ALL PRIVILEGES ON siremis.* TO siremis@localhost IDENTIFIED BY '8)Le5~#C'; FLUSH PRIVILEGES;"
+mysql -u root -p --execute="GRANT ALL PRIVILEGES ON siremis.* TO siremis@localhost IDENTIFIED BY 'siremisrw'; FLUSH PRIVILEGES;"
 
 #--------------------------------------------------
 # Enable ssl with certbot
