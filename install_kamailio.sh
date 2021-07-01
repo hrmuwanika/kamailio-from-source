@@ -95,7 +95,7 @@ make all
 make install
 ldconfig
 
-sed -i 's/# SIP_DOMAIN=kamailio.org/SIP_DOMAIN=example.com/g' /usr/local/etc/kamailio/kamctlrc
+sed -i 's/# SIP_DOMAIN=kamailio.org/SIP_DOMAIN=$WEBSITE_NAME/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBENGINE=MYSQL/DBENGINE=MYSQL/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBHOST=localhost/DBHOST=localhost/g' /usr/local/etc/kamailio/kamctlrc
 sed -i 's/# DBNAME=kamailio/DBNAME=kamailio/g' /usr/local/etc/kamailio/kamctlrc
@@ -114,6 +114,8 @@ sed -i -e '7i#!define WITH_ALIASDB\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '8i#!define WITH_NAT\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '9i#!define WITH_RTPENGINE\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '10i#!define WITH_ANTIFLOOD\' /usr/local/etc/kamailio/kamailio.cfg
+sed -i -e '11i#!define WITH_ACCDB\' /usr/local/etc/kamailio/kamailio.cfg
+sed -i -e '12i#!define WITH_JSONRPCS\' /usr/local/etc/kamailio/kamailio.cfg
 
 make install-systemd-debian
 systemctl daemon-reload
