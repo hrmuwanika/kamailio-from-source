@@ -115,7 +115,7 @@ sed -i -e '8i#!define WITH_NAT\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '9i#!define WITH_RTPENGINE\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '10i#!define WITH_ANTIFLOOD\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '11i#!define WITH_ACCDB\' /usr/local/etc/kamailio/kamailio.cfg
-sed -i -e '12i#!define WITH_JSONRPCS\' /usr/local/etc/kamailio/kamailio.cfg
+sed -i -e '12i##!define WITH_TLS\' /usr/local/etc/kamailio/kamailio.cfg
 
 make install-systemd-debian
 systemctl daemon-reload
@@ -125,12 +125,13 @@ systemctl start kamailio
 #----------------------------------------------------
 # Siremis installation
 #----------------------------------------------------
-sudo apt install -y apache2 apache2-utils 
-sudo apt install -y php php-mysql php-gd php-curl php-xml php-xmlrpc php-pear libapache2-mod-php unzip wget
-
+sudo apt install -y apache2 
 sudo a2enmod rewrite
-sudo systemctl enable apache2 
-sudo systemctl restart apache2
+
+sudo apt install -y php php-mysql php-gd php-curl php-xml libapache2-mod-php php-pear unzip wget make
+a2enmod php7.3
+
+sudo systemctl apache2 reload
 
 sudo sed -i s/"memory_limit = 128M"/"memory_limit = 512M"/g /etc/php/7.3/apache2/php.ini
 sudo sed -i s/";date.timezone =/date.timezone = Africa\/Kigali"/g /etc/php/7.3/apache2/php.ini
@@ -140,6 +141,7 @@ sudo sed -i s/"max_execution_time = 30"/"max_execution_time = 360"/g /etc/php/7.
 cd /usr/src
 wget http://pear.php.net/get/XML_RPC-1.5.5.tgz
 pear upgrade XML_RPC-1.5.5.tgz
+
 sudo systemctl enable apache2 
 
 #----------------------------------------------------
