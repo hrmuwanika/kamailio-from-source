@@ -110,9 +110,10 @@ sed -i -e '3i#!define WITH_AUTH\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '4i#!define WITH_IPAUTH\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '5i#!define WITH_USRLOCDB\' /usr/local/etc/kamailio/kamailio.cfg
 sed -i -e '6i#!define WITH_MULTIDOMAIN\' /usr/local/etc/kamailio/kamailio.cfg
-sed -i -e '7i#!define WITH_NAT\' /usr/local/etc/kamailio/kamailio.cfg
-sed -i -e '8i#!define WITH_RTPENGINE\' /usr/local/etc/kamailio/kamailio.cfg
-sed -i -e '9i#!define WITH_ANTIFLOOD\' /usr/local/etc/kamailio/kamailio.cfg
+sed -i -e '7i#!define WITH_ALIASDB\' /usr/local/etc/kamailio/kamailio.cfg
+sed -i -e '8i#!define WITH_NAT\' /usr/local/etc/kamailio/kamailio.cfg
+sed -i -e '9i#!define WITH_RTPENGINE\' /usr/local/etc/kamailio/kamailio.cfg
+sed -i -e '10i#!define WITH_ANTIFLOOD\' /usr/local/etc/kamailio/kamailio.cfg
 
 make install-systemd-debian
 systemctl daemon-reload
