@@ -21,17 +21,12 @@ WEBSITE_NAME="example.com"
 ADMIN_EMAIL="kamailio@example.com"
 ##
 
-#----------------------------------------------------
-# Set the time zone
-#----------------------------------------------------
-## FIND YOUR TIMEZONE
-tzselect
-
-## SET TIMEZONE EXAMPLE
+#--------------------------------------------------
+# Set up the timezones
+#--------------------------------------------------
+# set the correct timezone on ubuntu
 timedatectl set-timezone Africa/Kigali
-
-## CHECK TIMEZONE
-timedatectl status
+timedatectl
 
 #----------------------------------------------------
 # Disable password authentication
