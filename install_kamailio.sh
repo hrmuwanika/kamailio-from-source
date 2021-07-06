@@ -22,6 +22,13 @@ ADMIN_EMAIL="kamailio@example.com"
 ##
 
 #--------------------------------------------------
+# Update Server
+#--------------------------------------------------
+echo -e "\n============= Update Server ================"
+sudo apt update && sudo apt -y upgrade 
+sudo apt autoremove -y
+
+#--------------------------------------------------
 # Set up the timezones
 #--------------------------------------------------
 # set the correct timezone on ubuntu
@@ -36,12 +43,10 @@ sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config
 sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 sudo service sshd restart
 
-#--------------------------------------------------
-# Update Server
-#--------------------------------------------------
-echo -e "\n============= Update Server ================"
-sudo apt update && sudo apt -y upgrade 
-sudo apt autoremove -y
+#----------------------------------------------------
+# Set hostname
+#----------------------------------------------------
+sudo hostnamectl set-hostname 
 
 #----------------------------------------------------
 # Firewall rules
