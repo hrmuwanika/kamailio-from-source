@@ -61,7 +61,7 @@ chmod +x iptables.sh
 #--------------------------------------------------
 sudo apt install -y git gcc g++ flex bison libmariadb-dev libmariadb-dev-compat make autoconf libssl-dev libcurl4-openssl-dev tcpdump \
 libncurses5-dev libxml2-dev libpcre3-dev unixodbc-dev vim libsctp-dev libunistring-dev htop dkms libradcli-dev libmnl-dev lsb-release \
-screen ntp ntpdate libmariadbclient-dev libcurl3-gnutls libc6 libcurl4 ca-certificates dbus
+screen ntp ntpdate libmariadbclient-dev libcurl3-gnutls libc6 libcurl4 ca-certificates dbus 
 
 echo "set mouse-=a" >> ~/.vimrc
 
@@ -81,11 +81,11 @@ mysql_secure_installation
 # Download Kamailio from source
 #-----------------------------------------------
 cd /usr/local/src/
-sudo mkdir –p kamailio-5.5
-cd kamailio-5.5
+sudo mkdir –p kamailio-5.6
+cd kamailio-5.6
 sudo git clone --depth 1 --no-single-branch https://github.com/kamailio/kamailio kamailio
 cd kamailio
-git checkout -b 5.5 origin/5.5
+git checkout -b 5.6 origin/5.6
 
 make include_modules="db_mysql dialplan debugger permissions usrloc dispatcher registrar sdpops presence auth auth_db avp tm \
 presence_mwi outbound sl maxfwd xhttp db_text textops siputils uac presence_dialoginfo kex uac_redirect xlog siptrace sanity \
