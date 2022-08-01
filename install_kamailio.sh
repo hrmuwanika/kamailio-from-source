@@ -60,10 +60,8 @@ chmod +x iptables.sh
 # Install dependencies
 #--------------------------------------------------
 sudo apt install -y git gcc g++ flex bison libmariadb-dev libmariadb-dev-compat make autoconf pkg-config libssl-dev libcurl4-openssl-dev tcpdump \
-libncurses5-dev libxml2-dev libpcre3-dev unixodbc-dev vim libsctp-dev libunistring-dev htop dkms libradcli-dev libmnl-dev lsb-release \
+libncurses5-dev libxml2-dev libpcre3-dev unixodbc-dev nano libsctp-dev libunistring-dev htop dkms libradcli-dev libmnl-dev lsb-release \
 screen ntp ntpdate libmariadbclient-dev libcurl3-gnutls libc6 libcurl4 ca-certificates dbus sngrep
-
-echo "set mouse-=a" >> ~/.vimrc
 
 echo -e "\n============= Install dependencies ================"
 sudo apt install -y software-properties-common dirmngr
