@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Script for installing Kamailio installation on Debian Buster
+# Script for installing Kamailio installation on Debian Bullseye
 # Authors: Henry Robert Muwanika
 #
 #-------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ screen ntp ntpdate libmariadbclient-dev libcurl3-gnutls libc6 libcurl4 ca-certif
 echo -e "\n============= Install dependencies ================"
 sudo apt install -y software-properties-common dirmngr
 sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc'
-sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] https://mariadb.mirror.liquidtelecom.com/repo/10.5/debian buster main'
+sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] https://mariadb.mirror.liquidtelecom.com/repo/10.6/debian bullseye main'
 sudo apt update
 sudo apt install -y mariadb-server mariadb-client
 
@@ -79,11 +79,11 @@ mysql_secure_installation
 # Download Kamailio from source
 #-----------------------------------------------
 cd /usr/local/src/
-sudo mkdir –p kamailio-5.6
-cd kamailio-5.6
+sudo mkdir –p kamailio-5.7
+cd kamailio-5.7
 sudo git clone --depth 1 --no-single-branch https://github.com/kamailio/kamailio kamailio
 cd kamailio
-git checkout -b 5.6 origin/5.6
+git checkout -b 5.7 origin/5.7
 
 make include_modules="db_mysql dialplan debugger permissions usrloc dispatcher registrar sdpops presence auth auth_db avp tm \
 presence_mwi outbound sl maxfwd xhttp db_text textops siputils uac presence_dialoginfo kex uac_redirect xlog siptrace sanity \
